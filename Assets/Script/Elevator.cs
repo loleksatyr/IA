@@ -9,7 +9,8 @@ public class Elevator : MonoBehaviour
     public static bool active;
     bool counter = false;
     bool nadol;
-    
+    bool down = false;
+    bool wylo = true;
     void Start()
     {
         var spherec = GetComponent<Renderer>();
@@ -24,12 +25,14 @@ public class Elevator : MonoBehaviour
             {
                 StartCoroutine(Example());
                 counter = false;
+                wylo = false;
                 Debug.Log("gora"); 
                 
         }
             if(active)
             transform.Translate(Vector3.up * Time.deltaTime * speed1);
-
+            if(down)
+            transform.Translate(-Vector3.up * Time.deltaTime * speed1);
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -42,8 +45,14 @@ public class Elevator : MonoBehaviour
         {
             active = false;
             Debug.Log("stop");
+            down  = true;
         }
-
+ if (collision.gameObject.name == "StartPoint"&&wylo ==false)
+        {
+            active = true;
+            Debug.Log("start");
+            down  = false;
+        }
 
 
     }

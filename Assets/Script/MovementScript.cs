@@ -48,11 +48,5 @@ public class MovementScript : MonoBehaviour
         }
 
     }
-     void OnCollision(Collision collision)
-    {
-        if (collision.gameObject.name == "EndPoint")
-        {
-            Elevator.active = false;
-        }
-    }
+   
 }
