@@ -6,6 +6,8 @@ public class MovementScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public Rigidbody rb;
+      [Range(1f,100f)][SerializeField] float movementSpeed = 1f;
+    [SerializeField] float rotationSpeed = 1f;
     float speed = 5f;
    
     void Start()
@@ -21,25 +23,11 @@ public class MovementScript : MonoBehaviour
             rb.AddForce(transform.up* speed, ForceMode.Impulse );
         }
         */
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.velocity = transform.right * speed;
-            // rb.velocity = transform.forward * speed;
-        }
-        if (Input.GetKey(KeyCode.D))
+       var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f * rotationSpeed;
+            var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f * movementSpeed;
 
-        {
-            rb.velocity = -transform.right * speed;
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.velocity = -transform.forward * speed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.velocity = transform.forward * speed;
-        }
+            transform.Rotate(0, x, 0);
+            transform.Translate(0, 0, z);
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down),1))
