@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
-    float speed1 = 2f;
+    float speed1 = 1f;
      public float number;
      bool widze = false;
    
@@ -21,27 +21,24 @@ public class Enemy : MonoBehaviour
          number= Random.Range (-60f, 60f);
         checkedges();
        Debug.Log(widze);
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position,6);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position,10);
         foreach(Collider hitCollider in hitColliders){
             if(hitCollider.name == "Player"){
-                widze = true;
-                float step = speed1 * Time.deltaTime;
-             //   transform.position = Vector3.MoveTowards(transform.position,GameObject.Find("Player").GetComponent<Transform>().position,step);
-                Vector3 newDirection = Vector3.RotateTowards(transform.position, GameObject.Find("Player").GetComponent<Transform>().position,step,0.0f);
-                transform.rotation = Quaternion.LookRotation(newDirection);
+            float step = speed1 * Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position,GameObject.Find("Player").GetComponent<Transform>().position,step);
+              //transform.Translate(GameObject.Find("Player").GetComponent<Transform>().position * Time.deltaTime * speed1);
+             transform.LookAt(GameObject.Find("Player").GetComponent<Transform>().position);
+             //   Vector3 newDirection = Vector3.RotateTowards(transform.position, GameObject.Find("Player").GetComponent<Transform>().position,step,0.0f);
+              //  transform.rotation = Quaternion.LookRotation(newDirection);
             }
-           if(hitCollider.name != "Player"){
-                widze = false;
-               
-            }
-            if(widze == false){
-                   // transform.Translate(Vector3.forward * Time.deltaTime * speed1);
+           else{
+                   transform.Translate(Vector3.forward * Time.deltaTime * speed1);
             }
 
         }
     }
     public void checkedges(){
-        bool edge = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down),1);
+        bool edge = Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down),2);
         if(edge==false){
             transform.Rotate(0, number, 0, Space.Self);
            
