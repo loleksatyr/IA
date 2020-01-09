@@ -33,6 +33,7 @@ public class Elevator : MonoBehaviour
             transform.Translate(Vector3.up * Time.deltaTime * speed1);
             if(down)
             transform.Translate(-Vector3.up * Time.deltaTime * speed1);
+            Debug.Log(wylo);
     }
     void OnCollisionEnter(Collision collision)
     {

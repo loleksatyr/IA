@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     {
          number= Random.Range (-60f, 60f);
         checkedges();
-       Debug.Log(widze);
+      // Debug.Log(widze);
         Collider[] hitColliders = Physics.OverlapSphere(transform.position,10);
         foreach(Collider hitCollider in hitColliders){
             if(hitCollider.name == "Player"){
